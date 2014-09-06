@@ -32,6 +32,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'devise'
+
+gem 'omniauth-facebook'
+gem 'certified'
+
 gem 'pry-rails'
 
 # Use ActiveModel has_secure_password
