@@ -1,4 +1,5 @@
-<h1>All the books!</h1>
+<% if false %>
+<!-- <h1>All the books!</h1>
 <ul>
   <% @books.each do |book| %>
     <div class="book-entry">
@@ -11,3 +12,87 @@
     </div>
   <% end %>
 </ul>
+ -->
+ <% end %>
+
+ <!DOCTYPE html>
+<html>
+<head>
+  <!-- BASIC -->
+  <title>SwapBooks</title>
+  <meta charset="utf-8" />
+  <%= favicon_link_tag 'favicon.ico' %>
+
+  <!-- JQUERY -->
+  <%= javascript_include_tag "jquery-1.8.3.min" %>
+
+  <!-- BOOTSTRAP -->
+  <%= stylesheet_link_tag "bootstrap", media: "all" %>
+  <%= javascript_include_tag "bootstrap" %>
+
+  <!-- CUSTOM -->
+  <%= stylesheet_link_tag "main", media: "all" %>
+  <%= javascript_include_tag "main" %>
+  <%= stylesheet_link_tag "mainLI.js", media: "all" %>
+
+  <!-- LO SPECIFIC CSS -->
+  <style>
+    body {
+      background-color: transparent !important;
+    }
+  </style>
+
+</head>
+
+<body>  
+
+  <nav class="navbar navbar-default lo-navbar" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+      </div>
+      <ul class="nav navbar-nav navbar-right login-button">
+        <li><a href="#">logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="empty-prod">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div id="the-basics">
+            <input class="typeahead form-control" id="book-search" type="text" placeholder="Enter an ISBN, Book or Author name.">
+          </div>
+          <i class="form-control-feedback glyphicon glyphicon-search" style="top:17px;right:13px;"></i>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container ">
+    <div class="row my-books-title">
+      <h2>My Books</h2>
+    </div>
+    <div class="row my-books">
+      <!-- SHOW IF NO BOOKS -->
+      <div class="my-books-empty" style="display:none;">
+        <div class="my-books-empty-shape">
+          <h4 class="my-books-empty-text text-center">add some books!</h4>
+        </div>
+      </div>
+      <!-- SHOW IF BOOKS -->
+      <div class="my-books-populated" style="display:none;">
+        <!-- ADD THE TABLE HERE -->
+      </div>
+    </div>
+  </div>
+
+  <div class="footer text-center">
+    <p>Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
+  </div>
+
+</body>
+</html>
