@@ -1,13 +1,118 @@
-<h1>All the books!</h1>
-<ul>
-  <% @books.each do |book| %>
-    <div class="book-entry">
-      <li>
-        <p><%= book.name %></p>
-        <p><%= book.isbn %></p>
-        <%= button_to("Buy it", book_matches_path(book_id: book.id, state: 'buying'), method: :post) %>
-        <%= button_to("Sell it", book_matches_path(book_id: book.id, state: 'selling'), method: :post) %>
-      </li>
+<%= content_tag "div", id: "books", data: {url: Book.all} do %>
+<% end %>
+ <!DOCTYPE html>
+<html>
+<head>
+  <!-- BASIC -->
+  <title>SwapBooks</title>
+  <meta charset="utf-8" />
+  <%= favicon_link_tag 'favicon.ico' %>
+
+  <!-- JQUERY -->
+  <%= javascript_include_tag "jquery-1.8.3.min" %>
+
+  <!-- BOOTSTRAP -->
+  <%= stylesheet_link_tag "bootstrap", media: "all" %>
+  <%= javascript_include_tag "bootstrap" %>
+
+  <!-- ANGULAR -->
+  <%= javascript_include_tag "angular" %>
+
+  <!-- CUSTOM -->
+  <%= stylesheet_link_tag "main", media: "all" %>
+  <%= stylesheet_link_tag "typeahead", media: "all" %>
+
+  <%= javascript_include_tag "main" %>
+  <%= javascript_include_tag "typeahead" %>
+
+  <%= javascript_include_tag "books" %>
+
+  <!-- LO SPECIFIC CSS -->
+  <style>
+    body {
+      background-color: transparent !important;
+    }
+  </style>
+
+</head>
+
+<body ng-app="myBooksApp" ng-controller="myBooksController">  
+
+  <nav class="navbar navbar-default lo-navbar" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+      </div>
+      <ul class="nav navbar-nav navbar-right login-button">
+        <li><a href="#">logout</a></li>
+      </ul>
     </div>
-  <% end %>
-</ul>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <!-- show before search -->
+      <div class="empty-prod" style="">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div id="the-basics">
+            <input class="form-control typeahead" id="book-search" type="text" placeholder="Enter an ISBN, book, or author...">
+          </div>
+          <i class="form-control-feedback glyphicon glyphicon-search book-search-btn" style="top:17px;right:13px;cursor:pointer;"></i>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+      <!-- on click / enter when something is selected show this -->
+      <div class="filled-prod" style="display:none;">
+        <div class="col-lg-2 my-books-entry-image text-center"><%= image_tag "calc1.gif", height: '50' %></div>
+        <div class="col-lg-6 my-books-entry-name"><h4>Calculus of a Single Variable <small>978-0-470-46159-4</small></h4></div>
+        <div class="col-lg-3 text-center">
+          <div class="row buy-sell-row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4"><button type="button" class="btn btn-success btn-sm">Buy</button></div>
+            <div class="col-sm-4"><button type="button" class="btn btn-warning btn-sm">Sell</button></div>
+            <div class="col-sm-2"></div>
+          </div>
+          <div class="row count-row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4"><span class="badge">3</span></div>
+            <div class="col-sm-4"><span class="badge">5</span></div>
+            <div class="col-sm-2"></div>
+          </div>
+        </div>
+        <div class="col-lg-1 text-center prod-search-close-btn"><h3><span class="glyphicon glyphicon-remove"></span></h3></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container ">
+    <div class="row my-books-title">
+      <h2>My Books</h2>
+    </div>
+    <div class="row my-books">
+      <!-- SHOW IF NO BOOKS EXIST -->
+      <div class="my-books-empty" style="display:none;">
+        <div class="my-books-empty-shape">
+          <h4 class="my-books-empty-text text-center">add some books!</h4>
+        </div>
+      </div>
+      <!-- SHOW IF BOOKS EXIST -->
+      <div class="my-books-populated" style="">
+        <div class="row my-books-entry" ng-repeat="book in myBooks">
+          <div class="col-lg-2 my-books-entry-image text-center"><img src="assets/{{book.url}}" height="50" ></div>
+          <div class="col-lg-6 my-books-entry-name"><h4>{{book.name}} <small>{{book.isbn}}</small></h4></div>
+          <div class="col-lg-2 my-books-entry-notification text-center"><span ng-if="book.newNotif" class="badge">!</span></div>
+          <div ng-if="!book.isBuying" class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-warning">Selling</span></h3></div>
+          <div ng-if="book.isBuying" class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-success">Buying</span></h3></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer text-center">
+    <p >Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
+  </div>
+
+</body>
+</html>
