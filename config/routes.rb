@@ -1,10 +1,9 @@
 SwapBooks::Application.routes.draw do
+  root 'welcomes#home'
 
-  #resources :users, only: [ :create ]
-  get "home/show"
-  devise_for :users,
-        controllers: {  omniauth_callbacks: "omniauth_callbacks" } #,
-                        #confirmations: 'confirmations' }
-  root to: "home#show"
+  devise_for :users, controllers: {  omniauth_callbacks: "omniauth_callbacks" }
 
+  resources :books do
+    resources :matches
+  end
 end
