@@ -15,6 +15,9 @@
   <%= stylesheet_link_tag "bootstrap", media: "all" %>
   <%= javascript_include_tag "bootstrap" %>
 
+  <!-- ANGULAR -->
+  <%= javascript_include_tag "angular" %>
+
   <!-- CUSTOM -->
   <%= stylesheet_link_tag "main", media: "all" %>
   <%= stylesheet_link_tag "typeahead", media: "all" %>
@@ -33,7 +36,7 @@
 
 </head>
 
-<body>  
+<body ng-app="myBooksApp" ng-controller="myBooksController">  
 
   <nav class="navbar navbar-default lo-navbar" role="navigation">
     <div class="container-fluid">
@@ -49,18 +52,18 @@
   <div class="container">
     <div class="row">
       <!-- show before search -->
-      <div class="empty-prod" style="display:none;">
+      <div class="empty-prod" style="">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
           <div id="the-basics">
             <input class="form-control typeahead" id="book-search" type="text" placeholder="Enter an ISBN, book, or author...">
           </div>
-          <i class="form-control-feedback glyphicon glyphicon-search" style="top:17px;right:13px;cursor:pointer;"></i>
+          <i class="form-control-feedback glyphicon glyphicon-search book-search-btn" style="top:17px;right:13px;cursor:pointer;"></i>
         </div>
         <div class="col-lg-2"></div>
       </div>
       <!-- on click / enter when something is selected show this -->
-      <div class="filled-prod" style="">
+      <div class="filled-prod" style="display:none;">
         <div class="col-lg-2 my-books-entry-image text-center"><%= image_tag "calc1.gif", height: '50' %></div>
         <div class="col-lg-6 my-books-entry-name"><h4>Calculus of a Single Variable <small>978-0-470-46159-4</small></h4></div>
         <div class="col-lg-3 text-center">
@@ -77,7 +80,7 @@
             <div class="col-sm-2"></div>
           </div>
         </div>
-        <div class="col-lg-1 text-center"><h3><span class="glyphicon glyphicon-remove"></span></h3></div>
+        <div class="col-lg-1 text-center prod-search-close-btn"><h3><span class="glyphicon glyphicon-remove"></span></h3></div>
       </div>
     </div>
   </div>
@@ -96,11 +99,12 @@
       </div>
       <!-- SHOW IF BOOKS EXIST -->
       <div class="my-books-populated" style="">
-        <div class="row my-books-entry">
-          <div class="col-lg-2 my-books-entry-image text-center"><%= image_tag "calc1.gif", height: '50' %></div>
-          <div class="col-lg-6 my-books-entry-name"><h4>Calculus of a Single Variable <small>978-0-470-46159-4</small></h4></div>
-          <div class="col-lg-2 my-books-entry-notification text-center"><span class="badge">!</span></div>
-          <div class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-warning">Selling</span></h3></div>
+        <div class="row my-books-entry" ng-repeat="book in myBooks">
+          <div class="col-lg-2 my-books-entry-image text-center"><img src="assets/{{book.url}}" height="50" ></div>
+          <div class="col-lg-6 my-books-entry-name"><h4>{{book.name}} <small>{{book.isbn}}</small></h4></div>
+          <div class="col-lg-2 my-books-entry-notification text-center"><span ng-if="book.newNotif" class="badge">!</span></div>
+          <div ng-if="!book.isBuying" class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-warning">Selling</span></h3></div>
+          <div ng-if="book.isBuying" class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-success">Buying</span></h3></div>
         </div>
       </div>
     </div>

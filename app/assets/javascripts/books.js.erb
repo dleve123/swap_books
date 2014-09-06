@@ -46,6 +46,35 @@ $(document).ready(function() {
 
 	// EVERYTHING ELSE
 
-	
+	// Handles close button on product search
+	$('.prod-search-close-btn').click( function() {
+		$('.filled-prod').hide();
+		$('.empty-prod').show();
+	});
+
+	$('#book-search').keypress(function (event) {
+		if (event.which == 13) {
+			// SEARCH FUNCTION HERE
+			$('.filled-prod').show();
+		$('.empty-prod').hide();
+		}
+	});
+
+	$('.book-search-btn').click( function() {
+		$('.filled-prod').show();
+		$('.empty-prod').hide();
+	});
+
+});
+
+var myBooks = [ {name: 'Calculus 1: Early Transcendentals', isbn: 123455, author: 'Bill Engvall', url: 'calc1.gif', isBuying: false, newNotif: false},
+	{name: 'Physics: For the faint of heart', isbn: 13333333333, author: 'Noah Presdick', url: 'phys1.gif', isBuying: true, newNotif: true}
+	];
+
+var app = angular.module('myBooksApp', []);
+
+app.controller('myBooksController', function($scope, $http) {
+
+	$scope.myBooks = myBooks;
 
 });
