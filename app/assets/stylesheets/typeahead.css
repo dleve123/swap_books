@@ -17,6 +17,12 @@
   background-color: #fff;
 }
 
+.twitter-typeahead {
+  width: 100% !important;
+  position: relative;
+  top: 17px;
+}
+
 /*.typeahead:focus {
   border: 2px solid #0097cf;
 }*/
