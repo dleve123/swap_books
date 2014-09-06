@@ -3,10 +3,10 @@
   <% @books.each do |book| %>
     <div class="book-entry">
       <li>
-      <p><%= book.name %></p>
-      <p><%= book.isbn %></p>
-      <%= button_to("Buy it", books_matches_path(match: { id: book.id, state: 'buying' }), method: :post) %>
-      <%= button_tag "Sell it" %>
+        <p><%= book.name %></p>
+        <p><%= book.isbn %></p>
+        <%= button_to("Buy it", books_matches_path(book_id: book.id, state: 'buying'), method: :post) %>
+        <%= button_tag "Sell it" %>
       </li>
     </div>
   <% end %>
