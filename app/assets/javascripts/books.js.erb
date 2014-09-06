@@ -24,9 +24,12 @@ $(document).ready(function() {
 		};
 		};
 
-		var names= $('#books').data('books')
-		var isbns= $('#isbns').data('isbns')
-		var books= names.concat(isbns);
+		var books= $('#books').data('url')
+		var names=[];
+		for(var key=0; key < books.length; key++)
+		{
+			names.push(books[key].name)
+		}
 
 		$('#the-basics .typeahead').typeahead({
 		hint: true,
@@ -34,9 +37,9 @@ $(document).ready(function() {
 		minLength: 1
 		},
 		{
-		name: 'books',
+		name: 'names',
 		displayKey: 'value',
-		source: substringMatcher(books)
+		source: substringMatcher(names)
 		});
 
 });
