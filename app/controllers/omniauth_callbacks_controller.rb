@@ -13,5 +13,4 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   alias_method :facebook, :all
-
 end
