@@ -1,19 +1,5 @@
-<% if false %>
-<!-- <h1>All the books!</h1>
-<ul>
-  <% @books.each do |book| %>
-    <div class="book-entry">
-      <li>
-        <p><%= book.name %></p>
-        <p><%= book.isbn %></p>
-        <%= button_to("Buy it", book_matches_path(book_id: book.id, state: 'buying'), method: :post) %>
-        <%= button_to("Sell it", book_matches_path(book_id: book.id, state: 'selling'), method: :post) %>
-      </li>
-    </div>
-  <% end %>
-</ul>
- -->
- <% end %>
+<%= content_tag "div", id: "books", data: {books: Book.limit(100).pluck(:name)} do %>
+<% end %>
 
  <!DOCTYPE html>
 <html>
@@ -32,8 +18,12 @@
 
   <!-- CUSTOM -->
   <%= stylesheet_link_tag "main", media: "all" %>
+  <%= stylesheet_link_tag "typeahead", media: "all" %>
+
   <%= javascript_include_tag "main" %>
-  <%= stylesheet_link_tag "mainLI.js", media: "all" %>
+  <%= javascript_include_tag "typeahead" %>
+
+  <%= javascript_include_tag "books" %>
 
   <!-- LO SPECIFIC CSS -->
   <style>
