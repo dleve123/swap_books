@@ -1,6 +1,13 @@
 <h1>All the books!</h1>
 <ul>
   <% @books.each do |book| %>
-    <li><%= book.name %></li>
+    <div class="book-entry">
+      <li>
+      <p><%= book.name %></p>
+      <p><%= book.isbn %></p>
+      <%= button_tag "Buy it" %>
+      <%= button_tag "Sell it" %>
+      </li>
+    </div>
   <% end %>
 </ul>
