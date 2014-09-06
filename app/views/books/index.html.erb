@@ -55,7 +55,7 @@
           <div id="the-basics">
             <input class="typeahead form-control" id="book-search" type="text" placeholder="Enter an ISBN, Book or Author name.">
           </div>
-          <i class="form-control-feedback glyphicon glyphicon-search" style="top:17px;right:13px;"></i>
+          <i class="form-control-feedback glyphicon glyphicon-search" style="top:17px;right:13px;cursor:pointer;"></i>
         </div>
         <div class="col-lg-2"></div>
       </div>
@@ -67,21 +67,26 @@
       <h2>My Books</h2>
     </div>
     <div class="row my-books">
-      <!-- SHOW IF NO BOOKS -->
+      <!-- SHOW IF NO BOOKS EXIST -->
       <div class="my-books-empty" style="display:none;">
         <div class="my-books-empty-shape">
           <h4 class="my-books-empty-text text-center">add some books!</h4>
         </div>
       </div>
-      <!-- SHOW IF BOOKS -->
-      <div class="my-books-populated" style="display:none;">
-        <!-- ADD THE TABLE HERE -->
+      <!-- SHOW IF BOOKS EXIST -->
+      <div class="my-books-populated" style="">
+        <div class="row my-books-entry">
+          <div class="col-lg-2 my-books-entry-image text-center"><%= image_tag "calc1.gif", height: '50' %></div>
+          <div class="col-lg-6 my-books-entry-name"><h4>Calculus of a Single Variable <small>978-0-470-46159-4</small></h4></div>
+          <div class="col-lg-2 my-books-entry-notification"><span class="badge">!</span></div>
+          <div class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-warning">Selling</span></h3></div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="footer text-center">
-    <p>Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
+    <p >Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
   </div>
 
 </body>
