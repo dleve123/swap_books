@@ -5,7 +5,9 @@ SwapBooks::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'books#index'
 
-  resource :books
+  resource :books do
+    resources :matches
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
