@@ -24,17 +24,17 @@ $(document).ready(function() {
 		};
 		};
 
-		var states = $('#books').data('books')
-		
+		var books= $('#books').data('books')
+
 		$('#the-basics .typeahead').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 		},
 		{
-		name: 'states',
+		name: 'books',
 		displayKey: 'value',
-		source: substringMatcher(states)
+		source: substringMatcher(books)
 		});
 
 });
