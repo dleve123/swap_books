@@ -1,19 +1,15 @@
 class MatchesController < ApplicationController
   def create
-
     match = if params.fetch(:state) == 'buying'
-
               match = Match.create!(buying_match_params)
               notice = "Requesting #{match.book.name}!"
             else params.fetch(:state) == 'selling'
-
               match = Match.create!(selling_match_params)
               notice = "Selling #{match.book.name}!"
             end
 
     redirect_to root_url, flash: { notice: notice }
   end
-
 
   def buying_match_params
     params[:buyer_id] = current_user.id
