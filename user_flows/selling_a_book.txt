@@ -1,0 +1,7 @@
+Scenario: Selling a book
+  Given a logged in user
+  And a book that I own is on swapbooks
+  When I click sell
+  And I go to my deals page
+  Then that book should be there
+  And the deal for that book should be "looking to sell"
