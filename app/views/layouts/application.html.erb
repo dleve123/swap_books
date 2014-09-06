@@ -7,6 +7,9 @@
   <meta charset="utf-8" />
   <link rel="" href="favicon.png" />
 
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
   <!-- JQUERY -->
   <%= javascript_include_tag "jquery-1.8.3.min" %>
 
@@ -17,6 +20,7 @@
   <!-- CUSTOM -->
   <%= stylesheet_link_tag "main", media: "all" %>
   <%= javascript_include_tag "main" %>
+  <%= csrf_meta_tags %>
 
   <!-- LO SPECIFIC CSS -->
   <style>
@@ -30,12 +34,13 @@
 <body>
 
 <nav class="navbar navbar-default lo-navbar" role="navigation">
-		<div class="container-fluid">
+		<div class="container-fluid container-login">
 			<div class="navbar-header">
 				<a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
 			</div>
 			<ul class="nav navbar-nav navbar-right login-button">
 				<li><a href="/users/sign_in">Log in</a></li>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
 			</ul>
 		</div>
 	</nav>
