@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	// ALL SEARCH SHIT
+
 		var substringMatcher = function(strs) {
 		return function findMatches(q, cb) {
 		var matches, substrRegex;
@@ -41,5 +43,9 @@ $(document).ready(function() {
 		displayKey: 'value',
 		source: substringMatcher(names)
 		});
+
+	// EVERYTHING ELSE
+
+	
 
 });
