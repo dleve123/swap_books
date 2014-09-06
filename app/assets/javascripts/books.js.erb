@@ -2,9 +2,9 @@ $(document).ready(function() {
 
 	// ALL SEARCH SHIT
 
-		var substringMatcher = function(strs) {
+	var substringMatcher = function(strs) {
 		return function findMatches(q, cb) {
-		var matches, substrRegex;
+			var matches, substrRegex;
 
 		// an array that will be populated with substring matches
 		matches = [];
@@ -19,30 +19,30 @@ $(document).ready(function() {
 			// the typeahead jQuery plugin expects suggestions to a
 			// JavaScript object, refer to typeahead docs for more info
 			matches.push({ value: str });
-			}
-			});
+		}
+	});
 
 		cb(matches);
-		};
-		};
+	};
+};
 
-		var books= $('#books').data('url')
-		var names=[];
-		for(var key=0; key < books.length; key++)
-		{
-			names.push(books[key].name)
-		}
+var books= $('#books').data('url')
+var names=[];
+for(var key=0; key < books.length; key++)
+{
+	names.push(books[key].name)
+}
 
-		$('#the-basics .typeahead').typeahead({
-		hint: true,
-		highlight: true,
-		minLength: 1
-		},
-		{
-		name: 'names',
-		displayKey: 'value',
-		source: substringMatcher(names)
-		});
+$('#the-basics .typeahead').typeahead({
+	hint: true,
+	highlight: true,
+	minLength: 1
+},
+{
+	name: 'names',
+	displayKey: 'value',
+	source: substringMatcher(names)
+});
 
 	// EVERYTHING ELSE
 
@@ -56,7 +56,7 @@ $(document).ready(function() {
 		if (event.which == 13) {
 			// SEARCH FUNCTION HERE
 			$('.filled-prod').show();
-		$('.empty-prod').hide();
+			$('.empty-prod').hide();
 		}
 	});
 
@@ -65,11 +65,17 @@ $(document).ready(function() {
 		$('.empty-prod').hide();
 	});
 
+	$('.btn-lock-in').click(function() {
+		alert('worked');
+		$('#myModal').modal();
+		$('.datepicker').datepicker();
+	});
+
 });
 
 var myBooks = [ {name: 'Calculus 1: Early Transcendentals', isbn: 123455, author: 'Bill Engvall', url: 'calc1.gif', isBuying: false, newNotif: false},
-	{name: 'Physics: For the faint of heart', isbn: 13333333333, author: 'Noah Presdick', url: 'phys1.gif', isBuying: true, newNotif: true}
-	];
+{name: 'Physics: For the faint of heart', isbn: 13333333333, author: 'Noah Presdick', url: 'phys1.gif', isBuying: true, newNotif: true}
+];
 
 var app = angular.module('myBooksApp', []);
 
@@ -78,3 +84,5 @@ app.controller('myBooksController', function($scope, $http) {
 	$scope.myBooks = myBooks;
 
 });
+
+
