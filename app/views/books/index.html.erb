@@ -5,8 +5,8 @@
       <li>
         <p><%= book.name %></p>
         <p><%= book.isbn %></p>
-        <%= button_to("Buy it", books_matches_path(book_id: book.id, state: 'buying'), method: :post) %>
-        <%= button_to("Sell it", books_matches_path(book_id: book.id, state: 'selling'), method: :post) %>
+        <%= button_to("Buy it", book_matches_path(book_id: book.id, state: 'buying'), method: :post) %>
+        <%= button_to("Sell it", book_matches_path(book_id: book.id, state: 'selling'), method: :post) %>
       </li>
     </div>
   <% end %>

@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
               notice = "Selling #{match.book.name}!"
             end
 
-    redirect_to root_url, flash: { notice: notice }
+    redirect_to books_path, flash: { notice: notice }
   end
 
   def buying_match_params
