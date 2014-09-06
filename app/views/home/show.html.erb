@@ -3,3 +3,12 @@
 <% if user_signed_in? && current_user.provider=='facebook' %>
   <p> You are signed in with facebook </p>
 <% end %>
+<% if user_signed_in? %>
+  <p> You are signed in </p>
+<% end %>
+
+<%#= form_for(@user) do |f| %>
+  <%#= f.text_field :email, placeholder:"Enter your jhu email" %>
+
+  <%#= f.submit "Sign up" %>
+<%# end %>
