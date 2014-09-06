@@ -24,7 +24,9 @@ $(document).ready(function() {
 		};
 		};
 
-		var books= $('#books').data('books')
+		var names= $('#books').data('books')
+		var isbns= $('#isbns').data('isbns')
+		var books= names.concat(isbns);
 
 		$('#the-basics .typeahead').typeahead({
 		hint: true,

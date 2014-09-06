@@ -1,6 +1,9 @@
 <%= content_tag "div", id: "books", data: {books: Book.limit(100).pluck(:name)} do %>
 <% end %>
 
+<%= content_tag "div", id: "isbns", data: {isbns: Book.limit(100).pluck(:isbn)} do %>
+<% end %>
+
  <!DOCTYPE html>
 <html>
 <head>
