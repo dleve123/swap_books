@@ -28,4 +28,7 @@ SwapBooks::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  ENV['FACEBOOK_APP_ID'] = "1471374446481731";
+  ENV['FACEBOOK_SECRET'] = "10741f1953126fb1bd0a60e5fdfce256";
 end
