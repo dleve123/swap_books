@@ -1,4 +1,6 @@
 class MatchesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     match = if params.fetch(:state) == 'buying'
               match = Match.create!(buying_match_params)
