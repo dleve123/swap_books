@@ -1,16 +1,16 @@
-tom = User.create(email: 'tom@jhu.edu', password: 'password', 
+tom = User.create(email: 'tjaklit1@jhu.edu', password: 'password',
                   confirmed_at: Time.now, picture: "http://graph.facebook.com/866729690005368/picture",
                   name: "Tom Jaklitsch")
 
-eric = User.create(email: 'eric@jhu.edu', password: 'password',
+eric = User.create(email: 'ehaydel1@jhu.edu', password: 'password',
                   confirmed_at: Time.now, picture: "http://graph.facebook.com/10202524784820153/picture",
                   name: "Eric Haydel")
 
-dan = User.create(email: 'dan@jhu.edu', password: 'password', 
+dan = User.create(email: 'dlevens1@jhu.edu', password: 'password',
                   confirmed_at: Time.now, picture: "http://graph.facebook.com/10202713770869892/picture",
                   name: "Dan Levenson")
 
-noah = User.create(email: 'noah@jhu.edu', password: 'password', 
+noah = User.create(email: 'npresle1@jhu.edu', password: 'password',
                   confirmed_at: Time.now, picture: "http://graph.facebook.com/10202628687219746/picture",
                   name: "Noah Presler")
 
