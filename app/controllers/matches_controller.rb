@@ -3,8 +3,14 @@ class MatchesController < ApplicationController
   before_action :authenticate_user!,   except: [:show] #TEst code
  
   def show
-    @other_user = current_user
-    @user = current_user      # Obvious test code
+    @user = current_user
+
+    @match = Match.find(params[:id])
+    if @match.buyer.id == @user.id
+      @other_user = @match.seller
+    else
+      @other_user = @match.buyer
+    end
   end
 
   def create

@@ -3,12 +3,9 @@
 <br>
 <%= image_tag(photo) %>
 
-<% user = User.find(2) %>
-<% other_user = User.find(3) %>
-
-<% user_messages(user,other_user).each do |message| %>
+<% user_messages(@user,@other_user).each do |message| %>
  
-  <% if (message.sent_messageable_id == user.id) %>
+  <% if (message.sent_messageable_id == @user.id) %>
     <p><span class="chat-you"><strong>You: </strong></span><%= message.body %></p>
   <% else %>
     <p><span class="chat-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %> </p>
@@ -18,7 +15,7 @@
 <% end %>
 
 <%= form_for ActsAsMessageable::Message.new, :url => messages_path, :method => :post do |f| %>
-  <%= f.hidden_field :to, value: other_user.id %>
+  <%= f.hidden_field :to, value: @other_user.id %>
   <%= f.text_field :body, placeholder: "Respond..." %>
   <%= f.button :submit, class: 'btn' %>
 <% end %>
