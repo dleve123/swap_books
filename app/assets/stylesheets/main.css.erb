@@ -6,7 +6,6 @@ html {
 	background-size: cover;
 }
 
-
 h1, h2, h3 {
 	color: rgba(44, 62, 80,1.0) !important;
 }
@@ -50,24 +49,24 @@ h1, h2, h3 {
 }
 
 .navbar-collapse.collapse {
-display: block!important;
+	display: block !important;
 }
 
 .navbar-nav>li, .navbar-nav {
-float: left !important;
+	float: left !important;
 }
 
 
 .navbar-nav.navbar-right:last-child {
-margin-right: -15px !important;
+	margin-right: -15px !important;
 }
 
 .navbar-right {
-float: right!important;
+	float: right!important;
 }
 
 /*LO FOOTER*/
-.lo-footer {
+.footer {
 	background-color: rgba(44, 62, 80,1.0);
 	position:fixed;
 	bottom:0px;
@@ -75,12 +74,12 @@ float: right!important;
 	height:24px;
 }
 
-.lo-footer p {
+.footer p {
 	color: white;
 	padding:2px;
 }
 
-.lo-footer a {
+.footer a {
 	color: rgba(231, 76, 60,1.0);
 }
 
@@ -124,6 +123,142 @@ float: right!important;
 }
 
 #book-search {
-	position: relative;
+	/*position: relative;
+	top: 17px;*/
+}
+
+.search-ico {
 	top: 17px;
+	right: 13px;
+}
+
+.filled-prod {
+	margin-top: 30px;
+	background-color: white;
+	width: 100%;
+	height: 70px;
+	border: 1px solid rgba(44, 62, 80,1.0);
+	border-radius: 10px;
+}
+
+.prod-search-close-btn {
+	cursor: pointer;
+	position: relative;
+	top:2px;
+}
+
+.buy-sell-row {
+	margin-top: 8px;
+}
+
+.count-row {
+	margin-top: 3px;
+}
+
+/*MY BOOKS*/
+.my-books-populated {
+	background-color: white;
+	border: 1px solid rgba(44, 62, 80,1.0);
+	border-radius: 10px;
+	min-height: 70px;
+}
+
+.my-books-title {
+	margin-top: 20px;
+}
+
+.my-books-empty-shape {
+	background-color: rgba(0, 0, 0, .2);
+	width: 100%;
+	height: 70px;
+	border: 1px dashed rgba(0, 0, 0, .5);
+	border-radius: 10px;
+}
+
+.my-books-empty-text {
+	position: relative;
+	top: 15px;
+}
+
+.my-books-entry {
+	background-color:transparent;
+	height: 70px;
+}
+
+.my-books-entry-image {
+	position:relative;
+	top: 10px;
+}
+
+.my-books-entry-name {
+	position:relative;
+	top: 16px;
+}
+
+.my-books-entry-notification .badge {
+	min-width: 30px !important;
+	min-height: 30px !important;
+	border-radius: 15px !important;
+	font-size: 20px !important;
+	position: relative;
+	top: 20px;
+	cursor: pointer;
+	/*background-color: #d9534f;*/
+	border-color: #d43f3a;
+	-webkit-animation: blink 1s infinite;
+}
+
+.my-books-entry-notification .badge:hover {
+	background-color: rgb(171, 28, 30) !important;
+}
+
+@-webkit-keyframes blink {
+	0%, 100% {background-color: #d9534f}
+	50% {background-color: rgb(171, 28, 30)}
+}
+
+/*MATCH ROOM*/
+.match-room-container {
+	margin-top: 60px;
+	padding: 20px;
+	background-color:white;
+	border: 1px solid rgba(44, 62, 80,1.0);
+	border-radius: 10px;
+}
+
+.match-room-right {
+	padding: 25px;
+	padding-top: 0px;
+}
+
+.chat-window {
+	background-color: rgba(230, 230, 230,1.0);
+	min-height: 300px;
+	border: 1px solid rgba(0,0,0, .4);
+	border-radius: 10px;
+	padding: 5px;
+	overflow: auto;
+}
+
+.chat-them {
+	color: rgba(231, 76, 60,1.0);
+}
+
+.chat-message {
+	margin-top: 10px;
+}
+
+.chat-send-button {
+	margin-top: 10px;
+	position: relative;
+	left:-3px;
+}
+
+.btn-lock-in {
+	background-color: rgba(44, 62, 80,1.0);
+	color: white;
+}
+
+.datepicker {
+	z-index:1151111111111111111111111111 !important;
 }
