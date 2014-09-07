@@ -30,7 +30,10 @@
   <!-- DATE TIME PICKER STUFF -->
   <%= javascript_include_tag "moment" %>
   <%= javascript_include_tag "datepicker" %>
+  <%= javascript_include_tag "bootstrap-datepicker" %>
   <%= stylesheet_link_tag "datepicker", media: "all" %>
+  <%= javascript_include_tag "timepicker" %>
+  <%= stylesheet_link_tag "timepicker", media: "all" %>
 
 
   <!-- LO SPECIFIC CSS -->
@@ -99,7 +102,14 @@
         <h4 class="modal-title" id="myModalLabel">Lock In</h4>
       </div>
       <div class="modal-body">
-        <input type="text" type="text" class="form-control datepicker">
+        <strong>Date</strong>
+        <input type="text" type="text" id="datepicker" class="form-control datepicker">
+        <br />
+        <strong>Time</strong>
+        <div class="input-append bootstrap-timepicker">
+            <input id="timepicker1" type="text" class="form-control">
+            <span class="add-on"><i class="icon-time"></i></span>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
