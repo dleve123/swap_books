@@ -10,11 +10,6 @@ $(document).ready(function() {
 		$('#results').show();
 	});
 
-	// $('#book-search').blur(function() {
-	// 	$('#results').hide();
-	// });
-
-
 	var books= $('#books').data('url')
 	var names=[];
 	for(var key=0; key < books.length; key++)
@@ -37,9 +32,10 @@ $(document).ready(function() {
 	// 	}
 	// });
 
-	$('.row.search-row-result.ng-scope').click( function() {
+	$('.row.search-row-result.ng-scope').click(function() {
 		var name = $(this).children('.my-books-name').children('.ng-binding').html();
 		var isbn = $(this).children('.my-books-name').children('.ng-binding')[1].innerHTML;
+		var id = $(this).children('.my-books-name').children('.ng-binding')[2].innerHTML;
 		var author = $(this).children('.my-books-author').html();
 		var url = $(this).children('.text-center').children().attr('src');
 		$('#text-name').html(name);
@@ -48,6 +44,8 @@ $(document).ready(function() {
 		$('.filled-prod').show();
 		$('.empty-prod').hide();
 		$('#results').hide();
+    $('form')[0].action = "/books/" + id + "/matches?state=buying"
+    $('form')[1].action = "/books/" + id + "/matches?state=selling"
 	});
 
 	

@@ -14,7 +14,7 @@
   });
 </script>
 
-<body ng-app="myBooksApp" ng-controller="myBooksController">  
+<body ng-app="myBooksApp" ng-controller="myBooksController"> 
 
   <div class="container">
     <div class="row">
@@ -27,7 +27,9 @@
             <div id="results" style="display:none;">
               <div class="row search-row-result" ng-repeat="book in myBooks | filter:searchText" ng-click="book.handler()">
                 <div class="col-md-2 text-center"><img src="assets/{{book.image_name}}" height="50" ></div>
-                <div class="col-md-7 my-books-name"><strong>{{book.name}}</strong>: <div>{{book.isbn}}</div></div>
+                <div class="col-md-7 my-books-name">
+                  <strong>{{book.name}}</strong><div>{{book.isbn}}</div><div>{{book.id}}</div>
+                </div>
                 <div class="col-md-3 text-right search-text my-books-author">{{book.author}}</div>
                 <div class="row-index" style="display:none;">{{$index}}</div>
               </div>
@@ -45,9 +47,11 @@
           <div class="row buy-sell-row">
             <div class="col-sm-2"></div>
             <div class="col-sm-4">
-              <%= button_to("Buy it", book_matches_path(book_id: {{book.id}}, state: 'buying'), method: :post) %>
+              <%= button_to("Buy it", book_matches_path(book_id: '4', state: 'buying'), method: :post, class: 'btn btn-success btn-sm') %>
             </div>
-            <div class="col-sm-4"><button type="button" class="btn btn-warning btn-sm">Sell</button></div>
+            <div class="col-sm-4">
+              <%= button_to("Sell it", book_matches_path(book_id: '4', state: 'selling'), method: :post, class: 'btn btn-warning btn-sm') %>
+            </div>
             <div class="col-sm-2"></div>
           </div>
         </div>
