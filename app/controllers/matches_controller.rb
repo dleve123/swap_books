@@ -3,8 +3,15 @@ class MatchesController < ApplicationController
 
   def create
     match = if params.fetch(:state) == 'buying'
+
+              desired_book = Book.find(params.fetch(:book_id))
+
+              seller_match = FindSellerMatch.new(desired_book).find
+              seller_match.update(buyer_id: current_user.id)
+
               match = Match.create!(buying_match_params)
               notice = "Requesting #{match.book.name}!"
+
             else params.fetch(:state) == 'selling'
               match = Match.create!(selling_match_params)
               notice = "Selling #{match.book.name}!"
