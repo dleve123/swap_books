@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
     format: { with: /\w+@jhu\.edu\z/ },
     uniqueness: { :case_sensitive => false }
 
+
+  def books_for_sale
+    Book.joins(:matches).where(matches: { seller_id: id })
+  end
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
