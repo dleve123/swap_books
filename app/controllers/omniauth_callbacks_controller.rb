@@ -5,6 +5,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if user.persisted?
       flash.notice = "Signed in!"
       sign_in_and_redirect user
+      binding.pry
     else
       flash.notice = "Facebook auth failed"
       session["devise.user_attributes"] = user.attributes
