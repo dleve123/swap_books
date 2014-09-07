@@ -13,30 +13,34 @@
 
   <!-- LO SPECIFIC CSS -->
   <style>
-    body {
-      background-color: transparent !important;
-    }
+  body {
+    background-color: transparent !important;
+  }
   </style>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-default lo-navbar" role="navigation">
-  <div class="container-fluid container-login">
-    <div class="navbar-header">
-      <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+  <nav class="navbar navbar-default lo-navbar" role="navigation">
+    <div class="container-fluid container-login">
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+      </div>
+      <ul class="nav navbar-nav navbar-right login-button">
+        <li><a href="/users/sign_in">Log in</a></li>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right login-button">
-      <li><a href="/users/sign_in">Log in</a></li>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    </ul>
+  </nav>
+
+
+  <% flash.each do |type, message| %>
+  <div class="alert  custom-alert-warning text-center fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    <%= message %>
   </div>
-</nav>
-
-    <p style = "color:#e74c3c; font-size:20px;" class="notice text-center"><%= notice %></p>
-    <p style = "color:#e74c3c; font-size:20px;" class="alert text-center"><%= alert %></p>
-
+  <% end %>
   
 
   <%= yield %>
