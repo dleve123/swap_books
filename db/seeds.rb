@@ -12,3 +12,11 @@ Book.create!(name: 'Intro Biology', isbn: ("2" * 10))
 
 test = User.create(email: 'foo@jhu.edu', password: 'password')
 test.confirm!
+
+alice = User.create(email: 'alice@jhu.edu', password: 'password' )
+alice.confirm!
+bob = User.create(email: 'bob@jhu.edu', password: 'password' )
+bob.confirm!
+ 
+@message = alice.send_message(bob, "Hello bob!", "How are you?")
+@reply_message = bob.reply_to(@message, "Re: Hello bob!", "I'm fine!")

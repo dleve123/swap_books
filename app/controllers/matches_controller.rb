@@ -1,5 +1,11 @@
 class MatchesController < ApplicationController
-  before_action :authenticate_user!
+
+  before_action :authenticate_user!,   except: [:show] #TEst code
+ 
+  def show
+    @other_user = current_user
+    @user = current_user      # Obvious test code
+  end
 
   def create
     match = if params.fetch(:state) == 'buying'
