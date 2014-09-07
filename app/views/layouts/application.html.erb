@@ -39,7 +39,10 @@
 
 
   <% flash.each do |type, message| %>
-  <div class="alert  custom-alert-warning text-center fade in">
+  <script>setTimeout(function() {
+    $('.custom-alert-warning').fadeOut('fast');
+}, 5000); // <-- time in milliseconds</script>
+  <div class="alert  custom-alert-warning fade in text-center">
     <button class="close" data-dismiss="alert">×</button>
     <%= message %>
   </div>

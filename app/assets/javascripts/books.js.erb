@@ -1,6 +1,10 @@
 $(document).ready(function() {
 
-	console.log('234234234');
+	$('.btn-lock-in').click(function() {
+		$('#myModal').modal();
+		$('#datepicker').datepicker({});
+		$('#timepicker1').timepicker();
+	});
 
 	// ALL SEARCH SHIT
 	// TODO: NEed to be fixed
@@ -67,11 +71,7 @@ $('#the-basics .typeahead').typeahead({
 		$('.empty-prod').hide();
 	});
 
-	$('.btn-lock-in').click(function() {
-		$('#myModal').modal();
-		$('#datepicker').datepicker({});
-		$('#timepicker1').timepicker();
-	});
+	
 	
 	var myBooks = $('#books').data('url')
 
