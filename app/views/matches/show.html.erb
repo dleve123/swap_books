@@ -1,23 +1,125 @@
-<%= @other_user.name || "Name" %>
-<% photo = @other_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
-<% photo = "#{photo}?type=large" %>
-<br>
-<%= image_tag(photo) %>
-
-<% user_messages(@user,@other_user).each do |message| %>
- 
-  <% if (message.sent_messageable_id == @user.id) %>
-    <p><span class="chat-you"><strong>You: </strong></span><%= message.body %></p>
-  <% else %>
-    <p><span class="chat-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %> </p>
-  <% end %>
-
-  
+<%= content_tag "div", id: "books", data: {url: Book.all} do %>
 <% end %>
+ <!DOCTYPE html>
+<html>
+<head>
+  <!-- BASIC -->
+  <title>SwapBooks</title>
+  <meta charset="utf-8" />
+  <%= favicon_link_tag 'favicon.ico' %>
 
-<%= form_for ActsAsMessageable::Message.new, :url => messages_path, :method => :post do |f| %>
-  <%= f.hidden_field  :to,        value: @other_user.id   %>
-  <%= f.hidden_field  :from,      value: @user.id         %>
-  <%= f.text_field    :body, placeholder: "Respond..."    %>
-  <%= f.button :submit, class: 'btn' %>
-<% end %>
+  <!-- JQUERY -->
+  <%= javascript_include_tag "jquery-1.8.3.min" %>
+
+  <!-- BOOTSTRAP -->
+  <%= stylesheet_link_tag "bootstrap", media: "all" %>
+  <%= javascript_include_tag "bootstrap" %>
+
+  <!-- ANGULAR -->
+  <%= javascript_include_tag "angular" %>
+
+  <!-- CUSTOM -->
+  <%= stylesheet_link_tag "main", media: "all" %>
+  <%= stylesheet_link_tag "typeahead", media: "all" %>
+
+  <%= javascript_include_tag "main" %>
+  <%= javascript_include_tag "typeahead" %>
+
+  <%= javascript_include_tag "books" %>
+
+  <!-- DATE TIME PICKER STUFF -->
+  <%= javascript_include_tag "moment" %>
+  <%= javascript_include_tag "datepicker" %>
+  <%= javascript_include_tag "bootstrap-datepicker" %>
+  <%= stylesheet_link_tag "datepicker", media: "all" %>
+  <%= javascript_include_tag "timepicker" %>
+  <%= stylesheet_link_tag "timepicker", media: "all" %>
+
+
+  <!-- LO SPECIFIC CSS -->
+  <style>
+    body {
+      background-color: transparent !important;
+    }
+  </style>
+
+</head>
+
+<body>  
+
+  <div class="container match-room-container">
+    <div class="row">
+      <div class="col-lg-3">
+          <% photo = @other_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
+          <% photo = "#{photo}?type=large" %>
+          <%= image_tag(photo, :width => 200) %>
+        <h3><%= @other_user.name || @other_user.email %></h3>
+        <hr>
+        <h4> <%= @match.book.name %> <small><%= @match.book.isbn %></small></h4>
+        <hr>
+        <div class="" style="margin-left:50px;">
+          <%= image_tag "calc1.gif", width: '100' %> 
+        </div>
+      </div>
+      <div class="col-lg-9 match-room-right">
+        <div class="row" style="">
+
+          <h3>Chat</h3>
+          <div class="chat-window">
+            <% user_messages(@user,@other_user).each do |message| %>
+              <% if (message.sent_messageable_id == @user.id) %>
+                <p><span class="chat-you"><strong>You: </strong></span><%= message.body %> <small><i> Posted: <%= message.created_at %></i></small></p>
+              <% else %>
+                <p><span class="chat-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %> </p>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-lg-11">
+            <%= form_for ActsAsMessageable::Message.new, :url => messages_path, :method => :post do |f| %>
+            <%= f.hidden_field  :to,        value: @other_user.id   %>
+            <%= f.hidden_field  :from,      value: @user.id         %>
+            <%= f.text_field    :body, placeholder: "Send"    %>
+            <%= f.button :submit, class: 'btn' %>
+            <% end %>
+          </div>
+
+        </div>
+        <div class="row text-center">
+          <br /><br />
+          <button class="btn btn-lg btn-default btn-lock-in" onclick="">Lock in!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Lock In</h4>
+      </div>
+      <div class="modal-body">
+        <strong>Date</strong>
+        <input type="text" type="text" id="datepicker" class="form-control datepicker">
+        <br />
+        <strong>Time</strong>
+        <div class="input-append bootstrap-timepicker">
+            <input id="timepicker1" type="text" class="form-control">
+            <span class="add-on"><i class="icon-time"></i></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="footer text-center">
+    <p >Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
+  </div>
+
+</body>
+</html>
