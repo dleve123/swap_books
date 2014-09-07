@@ -9,11 +9,11 @@ class MatchesController < ApplicationController
       seller_match = FindSellerMatch.new(desired_book).find
       seller_match.update(buyer_id: current_user.id)
 
-      notice = "Requesting #{match.book.name}!"
+      notice = "Requesting #{seller_match.book.name}!"
 
     else params.fetch(:state) == 'selling'
-      match = Match.create!(selling_match_params)
-      notice = "Selling #{match.book.name}!"
+      seller_match = Match.create!(selling_match_params)
+      notice = "Selling #{seller_match.book.name}!"
     end
 
     redirect_to books_path, flash: { notice: notice }
