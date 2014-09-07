@@ -18,5 +18,6 @@ alice.confirm!
 bob = User.create(email: 'bob@jhu.edu', password: 'password' )
 bob.confirm!
  
-@message = alice.send_message(bob, "Hello bob!", "How are you?")
-@reply_message = bob.reply_to(@message, "Re: Hello bob!", "I'm fine!")
+@message = alice.send_message(bob, :body => "How are you?")
+@reply_message = bob.reply_to(@message, :body => "I'm fine!")
+@reply_message2 = alice.reply_to(@reply_message, :body => "Good to hear")

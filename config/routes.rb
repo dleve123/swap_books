@@ -6,4 +6,6 @@ SwapBooks::Application.routes.draw do
   resources :books do
     resources :matches
   end
+
+  resources :messages,    only: [ :create ]
 end

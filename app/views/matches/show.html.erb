@@ -2,3 +2,20 @@
 <% photo = current_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
 <br>
 <%= image_tag(photo) %>
+
+<% User.find(2).messages.each do |message| %> <%# REMOVE THIS SHIT! %>
+ 
+  <% if (message.sent_messageable_id == 2) %> <%# ALSO THIS SHIT! %>
+    <p><span class="chat-you"><strong>You: </strong></span><%= message.body %></p>
+  <% else %>
+    <p><span class="chat-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %> </p>
+  <% end %>
+
+  
+<% end %>
+
+<%= form_for ActsAsMessageable::Message.new, :url => messages_path, :method => :post do |f| %>
+  <%= f.hidden_field :to, value: User.find(3).id %>
+  <%= f.text_field :body, placeholder: "Respond..." %>
+  <%= f.button :submit, class: 'btn' %>
+<% end %>
