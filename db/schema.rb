@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20140907020500) do
     t.string   "isbn"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "author"
+    t.string   "image_name"
   end
 
   create_table "matches", force: true do |t|
