@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
   def create
     match = if params.fetch(:state) == 'buying'
               match = Match.create!(buying_match_params)
+              MatchMailer.match_email(current_user).deliver
               notice = "Requesting #{match.book.name}!"
             else params.fetch(:state) == 'selling'
               match = Match.create!(selling_match_params)
