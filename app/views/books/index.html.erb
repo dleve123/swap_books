@@ -40,11 +40,13 @@
       <!-- on click / enter when something is selected show this -->
       <div class="filled-prod" style="display:none;">
         <div class="col-lg-2 my-books-entry-image text-center"><img id="text-image" src="temp.jpg" height="50"></div>
-        <div class="col-lg-7 my-books-entry-name" style="position:relative;top:9px;"><h4><div id="text-name">Calculus of a Single Variable</div> <small><div id="text-isbn">978-0-470-46159-4</div></small></h4></div>
+        <div class="col-lg-7 my-books-entry-name" style="position:relative;top:9px;"><h4><div id="text-name"></div> <small><div id="text-isbn"></div></small></h4></div>
         <div class="col-lg-2 text-center" style="position:relative;top:11px;">
           <div class="row buy-sell-row">
             <div class="col-sm-2"></div>
-            <div class="col-sm-4"><button type="button" class="btn btn-success btn-sm">Buy</button></div>
+            <div class="col-sm-4">
+              <%= button_to("Buy it", book_matches_path(book_id: {{book.id}}, state: 'buying'), method: :post) %>
+            </div>
             <div class="col-sm-4"><button type="button" class="btn btn-warning btn-sm">Sell</button></div>
             <div class="col-sm-2"></div>
           </div>
