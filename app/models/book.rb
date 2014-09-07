@@ -2,7 +2,9 @@ class Book < ActiveRecord::Base
   has_many :matches
 
   validates :name, presence: true
+  validates :isbn, presence: true, isbn_format: true, uniqueness: true
 
-  # TODO: Validate that this is isn't in a range, but is either 10 or 13.
-  validates :isbn, presence: true, length: { in: 10..13 }, uniqueness: true
+  def self.available_for_sale
+    joins(:matches).where.not(matches: { seller_id: nil }).uniq
+  end
 end

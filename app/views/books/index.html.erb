@@ -1,6 +1,6 @@
 <h1>All the books!</h1>
 <ul>
-  <% @books.each do |book| %>
+  <% @all_books.each do |book| %>
     <div class="book-entry">
       <li>
         <p><%= book.name %></p>
@@ -11,3 +11,10 @@
     </div>
   <% end %>
 </ul>
+
+<h2>For Sale</h2>
+<% @books_for_sale.each do |book_for_sale| %>
+  <li>
+    <p><%= book_for_sale.name %></p>
+  </li>
+<% end %>

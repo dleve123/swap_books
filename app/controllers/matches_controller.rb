@@ -8,14 +8,20 @@ class MatchesController < ApplicationController
   end
 
   def create
-    match = if params.fetch(:state) == 'buying'
-              match = Match.create!(buying_match_params)
-              MatchMailer.match_email(current_user).deliver
-              notice = "Requesting #{match.book.name}!"
-            else params.fetch(:state) == 'selling'
-              match = Match.create!(selling_match_params)
-              notice = "Selling #{match.book.name}!"
-            end
+    if params.fetch(:state) == 'buying'
+      desired_book = Book.find(params.fetch(:book_id))
+
+      seller_match = FindSellerMatch.new(desired_book).find
+      seller_match.update(buyer_id: current_user.id)
+
+      MatchMailer.match_email(current_user).deliver
+
+      notice = "Requesting #{seller_match.book.name}!"
+
+    else params.fetch(:state) == 'selling'
+      seller_match = Match.create!(selling_match_params)
+      notice = "Selling #{seller_match.book.name}!"
+    end
 
     redirect_to books_path, flash: { notice: notice }
   end
