@@ -10,9 +10,9 @@ $(document).ready(function() {
 		$('#results').show();
 	});
 
-	$('#book-search').blur(function() {
-		$('#results').hide();
-	});
+	// $('#book-search').blur(function() {
+	// 	$('#results').hide();
+	// });
 
 
 	var books= $('#books').data('url')
@@ -29,17 +29,25 @@ $(document).ready(function() {
 		$('.empty-prod').show();
 	});
 
-	$('#book-search').keypress(function (event) {
-		if (event.which == 13) {
-			// SEARCH FUNCTION HERE
-			$('.filled-prod').show();
-			$('.empty-prod').hide();
-		}
-	});
+	// $('#book-search').keypress(function (event) {
+	// 	if (event.which == 13) {
+	// 		// SEARCH FUNCTION HERE
+	// 		$('.filled-prod').show();
+	// 		$('.empty-prod').hide();
+	// 	}
+	// });
 
-	$('.book-search-btn').click( function() {
+	$('.row.search-row-result.ng-scope').click( function() {
+		var name = $(this).children('.my-books-name').children('.ng-binding').html();
+		var isbn = $(this).children('.my-books-name').children('.ng-binding')[1].innerHTML;
+		var author = $(this).children('.my-books-author').html();
+		var url = $(this).children('.text-center').children().attr('src');
+		$('#text-name').html(name);
+		$('#text-isbn').html(isbn);
+		$("#text-image").attr("src",url);
 		$('.filled-prod').show();
 		$('.empty-prod').hide();
+		$('#results').hide();
 	});
 
 	
