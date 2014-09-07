@@ -28,8 +28,11 @@
         <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
       </div>
       <ul class="nav navbar-nav navbar-right login-button">
-        <li><a href="/users/sign_in">Log in</a></li>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <li><a href="/users/sign_in">Log in</a></li>
+        <% end %>
       </ul>
     </div>
   </nav>
