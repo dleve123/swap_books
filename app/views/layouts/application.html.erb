@@ -13,35 +13,42 @@
 
   <!-- LO SPECIFIC CSS -->
   <style>
-    body {
-      background-color: transparent !important;
-    }
+  body {
+    background-color: transparent !important;
+  }
   </style>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-default lo-navbar" role="navigation">
-  <div class="container-fluid container-login">
-    <div class="navbar-header">
-      <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+  <nav class="navbar navbar-default lo-navbar" role="navigation" style="position:relative;top:-51px">
+    <div class="container-fluid container-login" style="position:relative;top:53px;">
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+      </div>
+      <ul class="nav navbar-nav navbar-right login-button">
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <li><%= link_to "Log in", new_user_session_path, data: { no_turbolink: true } %></li>
+        <% end %>
+      </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right login-button">
-      <li><a href="/users/sign_in">Log in</a></li>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    </ul>
-  </div>
-</nav>
+  </nav>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+
+  <% flash.each do |type, message| %>
+  <div class="alert  custom-alert-warning text-center fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    <%= message %>
+  </div>
+  <% end %>
+  
 
   <%= yield %>
 
 </body>
-
-
 
 </html>
 

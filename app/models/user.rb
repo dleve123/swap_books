@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
     Book.joins(:matches).where(matches: { buyer_id: id })
   end
 
+  acts_as_messageable   :dependent  => :destroy,              # default :nullify
+                        :required   => :body                  # default [:topic, :body]
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider

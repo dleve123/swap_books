@@ -1,0 +1,4 @@
+<%= current_user.name || "Name" %>
+<% photo = current_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
+<br>
+<%= image_tag(photo) %>

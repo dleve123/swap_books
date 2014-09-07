@@ -1,13 +1,20 @@
 class MatchesController < ApplicationController
-  before_action :authenticate_user!
+
+  before_action :authenticate_user!,   except: [:show] #TEst code
+ 
+  def show
+    @other_user = current_user
+    @user = current_user      # Obvious test code
+  end
 
   def create
     if params.fetch(:state) == 'buying'
-
       desired_book = Book.find(params.fetch(:book_id))
 
       seller_match = FindSellerMatch.new(desired_book).find
       seller_match.update(buyer_id: current_user.id)
+
+      MatchMailer.match_email(current_user).deliver
 
       notice = "Requesting #{seller_match.book.name}!"
 
