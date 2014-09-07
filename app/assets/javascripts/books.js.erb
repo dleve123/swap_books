@@ -1,64 +1,34 @@
 $(document).ready(function() {
 
-	$('.btn-lock-in').click(function() {
-		$('#myModal').modal();
-		$('#datepicker').datepicker({});
-		$('#timepicker1').timepicker();
-	});
+  $('.btn-lock-in').click(function() {
+    $('#myModal').modal();
+    $('#datepicker').datepicker({});
+    $('#timepicker1').timepicker();
+  });
 
-	$('.form-control').focus(function() {
-		$('#results').show();
-	});
+  $('.form-control').focus(function() {
+    $('#results').show();
+  });
 
-	var books= $('#books').data('url')
-	var names=[];
-	for(var key=0; key < books.length; key++)
-	{
-		names.push(books[key].name)
-	}
-	// EVERYTHING ELSE
+  // Handles close button on product search
+  $('.prod-search-close-btn').click(function() {
+    $('.filled-prod').hide();
+    $('.empty-prod').show();
+  });
 
-	// Handles close button on product search
-	$('.prod-search-close-btn').click( function() {
-		$('.filled-prod').hide();
-		$('.empty-prod').show();
-	});
-
-	// $('#book-search').keypress(function (event) {
-	// 	if (event.which == 13) {
-	// 		// SEARCH FUNCTION HERE
-	// 		$('.filled-prod').show();
-	// 		$('.empty-prod').hide();
-	// 	}
-	// });
-
-	$('.row.search-row-result.ng-scope').click(function() {
-		var name = $(this).children('.my-books-name').children('.ng-binding').html();
-		var isbn = $(this).children('.my-books-name').children('.ng-binding')[1].innerHTML;
-		var id = $(this).children('.my-books-name').children('.ng-binding')[2].innerHTML;
-		var author = $(this).children('.my-books-author').html();
-		var url = $(this).children('.text-center').children().attr('src');
-		$('#text-name').html(name);
-		$('#text-isbn').html(isbn);
-		$("#text-image").attr("src",url);
-		$('.filled-prod').show();
-		$('.empty-prod').hide();
-		$('#results').hide();
+  $('.row.search-row-result.ng-scope').click(function() {
+    var name = $(this).children('.my-books-name').children('.ng-binding').html();
+    var isbn = $(this).children('.my-books-name').children('.ng-binding')[1].innerHTML;
+    var id = $(this).children('.my-books-name').children('.ng-binding')[2].innerHTML;
+    var author = $(this).children('.my-books-author').html();
+    var url = $(this).children('.text-center').children().attr('src');
+    $('#text-name').html(name);
+    $('#text-isbn').html(isbn);
+    $("#text-image").attr("src",url);
+    $('.filled-prod').show();
+    $('.empty-prod').hide();
+    $('#results').hide();
     $('form')[0].action = "/books/" + id + "/matches?state=buying"
     $('form')[1].action = "/books/" + id + "/matches?state=selling"
-	});
-
-	
-	
-	var myBooks = $('#books').data('url')
-
+  });
 });
-
-
-var app = angular.module('myBooksApp', []);
-
-app.controller('myBooksController', function($scope, $http) {
-	$scope.myBooks = myBooks;
-});
-
-

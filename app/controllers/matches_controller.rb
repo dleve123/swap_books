@@ -1,22 +1,34 @@
 class MatchesController < ApplicationController
 
   before_action :authenticate_user!,   except: [:show] #TEst code
- 
+
   def show
-    @other_user = current_user
-    @user = current_user      # Obvious test code
+    @user = current_user
+
+    @match = Match.unscoped.find(params[:id])
+    if @match.buyer.id == @user.id
+      @other_user = @match.seller
+    else
+      @other_user = @match.buyer
+    end
   end
 
   def create
-    match = if params.fetch(:state) == 'buying'
-              match = Match.create!(buying_match_params)
-              notice = "Requesting #{match.book.name}!"
-            else params.fetch(:state) == 'selling'
-              match = Match.create!(selling_match_params)
-              notice = "Selling #{match.book.name}!"
-            end
+    if params.fetch(:state) == 'buying'
+      desired_book = Book.find(params.fetch(:book_id))
 
-    redirect_to books_path, flash: { notice: notice }
+      seller_match = FindSellerMatch.new(desired_book).find
+      seller_match.update(buyer_id: current_user.id)
+
+      MatchMailer.match_email(seller_match.seller, current_user, seller_match.book).deliver
+
+      notice = "Match Made! - Talk to #{seller_match.seller.email}"
+      redirect_to book_match_path(desired_book, seller_match.id), flash: { notice: notice }
+    else params.fetch(:state) == 'selling'
+      seller_match = Match.create!(selling_match_params)
+      notice = "Selling #{seller_match.book.name}!"
+      redirect_to books_path, flash: { notice: notice }
+    end
   end
 
   def buying_match_params

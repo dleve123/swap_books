@@ -1,12 +1,18 @@
-<%= content_tag "div", id: "books", data: { url: Book.all } do %>
+<%= content_tag "div", id: "available-books", data: { url: @available_books } do %>
+<% end %>
+
+<%= content_tag "div", id: "my-books", data: { url: @books_for_sale } do %>
 <% end %>
 
 <script>
   var app = angular.module('myBooksApp', []);
-  var myBooks = $('#books').data('url');
+
+  var availableBooks = $('#available-books').data('url');
+  var myBooks = $('#my-books').data('url');
 
   app.controller('myBooksController', function($scope, $http) {
     $scope.myBooks = myBooks;
+    $scope.availableBooks = availableBooks;
 
     $scope.handler = function() {
     alert($http);
@@ -14,7 +20,7 @@
   });
 </script>
 
-<body ng-app="myBooksApp" ng-controller="myBooksController"> 
+<body ng-app="myBooksApp" ng-controller="myBooksController">
 
   <div class="container">
     <div class="row">
@@ -25,8 +31,8 @@
           <div id="the-basics">
             <input class="form-control" id="book-search" ng-model="searchText" type="text" placeholder="Enter an ISBN, book, or author...">
             <div id="results" style="display:none;">
-              <div class="row search-row-result" ng-repeat="book in myBooks | filter:searchText" ng-click="book.handler()">
-                <div class="col-md-2 text-center"><img src="assets/{{book.image_name}}" height="50" ></div>
+              <div class="row search-row-result" ng-repeat="book in availableBooks | filter:searchText" ng-click="book.handler()">
+                <!-- <div class="col-md-2 text-center"><img src="assets/{{book.image_name}}" height="50" ></div> -->
                 <div class="col-md-7 my-books-name">
                   <strong>{{book.name}}</strong><div>{{book.isbn}}</div><div>{{book.id}}</div>
                 </div>
@@ -63,7 +69,7 @@
 
   <div class="container ">
     <div class="row my-books-title">
-      <h2>My Books</h2>
+      <h2>Books I'm Selling</h2>
     </div>
     <div class="row my-books">
       <!-- SHOW IF NO BOOKS EXIST -->
@@ -86,4 +92,3 @@
   </div>
 
 </body>
-</html>

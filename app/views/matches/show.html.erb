@@ -1,10 +1,6 @@
 <%= javascript_include_tag "bootstrap" %>
 <%= javascript_include_tag "bootstrap-datepicker" %>
 
-<script>
-
-</script>
-
 <div class="container match-room-container">
   <div class="row">
     <div class="col-lg-3">
@@ -69,3 +65,27 @@
 <div class="footer text-center">
   <p >Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
 </div>
+
+<%= @other_user.name || "Name" %>
+<% photo = @other_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
+<% photo = "#{photo}?type=large" %>
+<br>
+<%= image_tag(photo) %>
+
+<% user_messages(@user,@other_user).each do |message| %>
+ 
+  <% if (message.sent_messageable_id == @user.id) %>
+    <p><span class="chat-you"><strong>You: </strong></span><%= message.body %></p>
+  <% else %>
+    <p><span class="chat-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %> </p>
+  <% end %>
+
+  
+<% end %>
+
+<%= form_for ActsAsMessageable::Message.new, :url => messages_path, :method => :post do |f| %>
+  <%= f.hidden_field  :to,        value: @other_user.id   %>
+  <%= f.hidden_field  :from,      value: @user.id         %>
+  <%= f.text_field    :body, placeholder: "Respond..."    %>
+  <%= f.button :submit, class: 'btn' %>
+<% end %>
