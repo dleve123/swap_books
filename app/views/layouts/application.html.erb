@@ -2,38 +2,52 @@
 <html>
 
 <head>
+  <!-- BASIC -->
   <title>SwapBooks</title>
+  <meta charset="utf-8" />
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= favicon_link_tag '/favicon.ico?1"' %>
+  <%= favicon_link_tag "/favicon.ico?1" %>
+  <%= csrf_meta_tag %>
 
-  <%= csrf_meta_tags %>
+  <!-- LO SPECIFIC CSS -->
+  <style>
+  body {
+    background-color: transparent !important;
+  }
+  </style>
+
 </head>
 
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+
+  <nav class="navbar navbar-default lo-navbar" role="navigation">
+    <div class="container-fluid container-login">
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
+      </div>
+      <ul class="nav navbar-nav navbar-right login-button">
+        <li><a href="/users/sign_in">Log in</a></li>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      </ul>
+    </div>
+  </nav>
+
+
+  <% flash.each do |type, message| %>
+  <div class="alert  custom-alert-warning text-center fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    <%= message %>
+  </div>
+  <% end %>
+  
 
   <%= yield %>
 
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong>.
-    <p><%= current_user.provider %></p>
-    <%= link_to 'Edit profile', edit_user_registration_path %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> |
-    <%= link_to "Login", new_user_session_path %>
-  <% end %>
 </body>
 
-<div id="Debugging Information">
-  <%= debug(params) if Rails.env.development? %>
-</div>
 
-<div id="Sanity check" %>
-  Current user: <%= current_user || "nil" %>
-</div>
 
 </html>
 

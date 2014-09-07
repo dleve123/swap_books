@@ -32,7 +32,6 @@ SwapBooks::Application.configure do
   ENV['FACEBOOK_APP_ID'] = "1471374446481731";
   ENV['FACEBOOK_SECRET'] = "10741f1953126fb1bd0a60e5fdfce256";
 
-  config.action_mailer.default_url_options = { :host => 'swapbooks.me' }
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.sendgrid.net",
     :port           => "587",

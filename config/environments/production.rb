@@ -78,7 +78,7 @@ SwapBooks::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { :host => 'swapbooks.me' }
+  config.action_mailer.default_url_options = { :host => 'www.swapbooks.me' }
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.sendgrid.net",
     :port           => "587",

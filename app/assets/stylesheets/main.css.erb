@@ -1,5 +1,5 @@
 html { 
-	background: url(<%= asset_data_uri 'bg.png' %>) no-repeat center center fixed; 
+	background: url(<%= asset_data_uri 'bg.png' %>) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -20,6 +20,10 @@ h1, h2, h3 {
 	position: relative;
 	top: 10px;
 	left: 10px;
+}
+
+.container-login{
+	background-color: transparent !important;
 }
 
 .navbar-default {
@@ -79,7 +83,25 @@ h1, h2, h3 {
 	color: rgba(231, 76, 60,1.0);
 }
 
+.notice {
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
 
+.alert {
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+
+.custom-alert-warning {
+  position: fixed;
+  right: 25px;
+  left: 25px;
+  background-color:#e74c3c;
+  border-color: ##e67e22;
+}
 
 /*CONTENT STUFF*/
 .buffer {
@@ -235,4 +257,5 @@ h1, h2, h3 {
 .btn-lock-in {
 	background-color: rgba(44, 62, 80,1.0);
 	color: white;
+}
 }
