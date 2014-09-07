@@ -28,6 +28,7 @@ $(document).ready(function() {
     $('.filled-prod').show();
     $('.empty-prod').hide();
     $('#results').hide();
+
     $('form')[0].action = "/books/" + id + "/matches?state=buying"
     $('form')[1].action = "/books/" + id + "/matches?state=selling"
   });

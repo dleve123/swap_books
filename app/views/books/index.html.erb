@@ -21,7 +21,6 @@
 </script>
 
 <body ng-app="myBooksApp" ng-controller="myBooksController">
-
   <div class="container">
     <div class="row">
       <!-- show before search -->
@@ -32,7 +31,7 @@
             <input class="form-control" id="book-search" ng-model="searchText" type="text" placeholder="Enter an ISBN, book, or author...">
             <div id="results" style="display:none;">
               <div class="row search-row-result" ng-repeat="book in availableBooks | filter:searchText" ng-click="book.handler()">
-                <!-- <div class="col-md-2 text-center"><img src="assets/{{book.image_name}}" height="50" ></div> -->
+                <div class="col-md-2 text-center"><img src="assets/{{book.image_name}}" height="50"></div>
                 <div class="col-md-7 my-books-name">
                   <strong>{{book.name}}</strong><div>{{book.isbn}}</div><div>{{book.id}}</div>
                 </div>
