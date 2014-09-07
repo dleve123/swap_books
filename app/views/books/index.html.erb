@@ -21,7 +21,7 @@
           <div id="the-basics">
             <input class="form-control" id="book-search" ng-model="searchText" type="text" placeholder="Enter an ISBN, book, or author...">
             <div id="results" style="display:none;">
-              <div class="row" ng-repeat="book in myBooks | filter:searchText">
+              <div class="row search-row-result" ng-repeat="book in myBooks | filter:searchText">
                 <div class="col-md-2"><img src="assets/{{book.url}}" height="50" ></div>
                 <div class="col-md-7 search-text"><strong>{{book.name}}</strong>: <small>{{book.isbn}}</small></div>
                 <div class="col-md-3 text-right search-text">{{book.author}}</div>
