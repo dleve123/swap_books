@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
   def show
     @user = current_user
 
-    @match = Match.find(params[:id])
+    @match = Match.unscoped.find(params[:id])
     if @match.buyer.id == @user.id
       @other_user = @match.seller
     else
@@ -23,13 +23,12 @@ class MatchesController < ApplicationController
       MatchMailer.match_email(current_user).deliver
 
       notice = "Requesting #{seller_match.book.name}!"
-
+      redirect_to book_match_path(desired_book, seller_match.id), flash: { notice: notice }
     else params.fetch(:state) == 'selling'
       seller_match = Match.create!(selling_match_params)
       notice = "Selling #{seller_match.book.name}!"
+      redirect_to books_path, flash: { notice: notice }
     end
-
-    redirect_to books_path, flash: { notice: notice }
   end
 
   def buying_match_params

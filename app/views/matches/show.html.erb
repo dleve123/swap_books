@@ -1,5 +1,6 @@
-<%= current_user.name || "Name" %>
-<% photo = current_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
+<%= @other_user.name || "Name" %>
+<% photo = @other_user.picture || "https://www.drupal.org/files/profile_default.jpg" %>
+<% photo = "#{photo}?type=large" %>
 <br>
 <%= image_tag(photo) %>
 
@@ -15,7 +16,8 @@
 <% end %>
 
 <%= form_for ActsAsMessageable::Message.new, :url => messages_path, :method => :post do |f| %>
-  <%= f.hidden_field :to, value: @other_user.id %>
-  <%= f.text_field :body, placeholder: "Respond..." %>
+  <%= f.hidden_field  :to,        value: @other_user.id   %>
+  <%= f.hidden_field  :from,      value: @user.id         %>
+  <%= f.text_field    :body, placeholder: "Respond..."    %>
   <%= f.button :submit, class: 'btn' %>
 <% end %>
