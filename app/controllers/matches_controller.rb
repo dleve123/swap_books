@@ -22,7 +22,7 @@ class MatchesController < ApplicationController
 
       MatchMailer.match_email(seller_match.seller, current_user, seller_match.book).deliver
 
-      notice = "Requesting #{seller_match.book.name}!"
+      notice = "Match Made! - Talk to #{seller_match.seller.email}"
       redirect_to book_match_path(desired_book, seller_match.id), flash: { notice: notice }
     else params.fetch(:state) == 'selling'
       seller_match = Match.create!(selling_match_params)
