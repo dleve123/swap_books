@@ -1,20 +1,94 @@
-<h1>All the books!</h1>
-<ul>
-  <% @all_books.each do |book| %>
-    <div class="book-entry">
-      <li>
-        <p><%= book.name %></p>
-        <p><%= book.isbn %></p>
-        <%= button_to("Buy it", book_matches_path(book_id: book.id, state: 'buying'), method: :post) %>
-        <%= button_to("Sell it", book_matches_path(book_id: book.id, state: 'selling'), method: :post) %>
-      </li>
-    </div>
-  <% end %>
-</ul>
-
-<h2>Books I'm Selling</h2>
-<% @books_for_sale.each do |book_for_sale| %>
-  <li>
-    <p><%= book_for_sale.name %></p>
-  </li>
+<%= content_tag "div", id: "available-books", data: { url: @available_books } do %>
 <% end %>
+
+<%= content_tag "div", id: "my-books", data: { url: @books_for_sale } do %>
+<% end %>
+
+<script>
+  var app = angular.module('myBooksApp', []);
+
+  var availableBooks = $('#available-books').data('url');
+  var myBooks = $('#my-books').data('url');
+
+  app.controller('myBooksController', function($scope, $http) {
+    $scope.myBooks = myBooks;
+    $scope.availableBooks = availableBooks;
+
+    $scope.handler = function() {
+    alert($http);
+  };
+  });
+</script>
+
+<body ng-app="myBooksApp" ng-controller="myBooksController">
+
+  <div class="container">
+    <div class="row">
+      <!-- show before search -->
+      <div class="empty-prod" style="">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div id="the-basics">
+            <input class="form-control" id="book-search" ng-model="searchText" type="text" placeholder="Enter an ISBN, book, or author...">
+            <div id="results" style="display:none;">
+              <div class="row search-row-result" ng-repeat="book in availableBooks | filter:searchText" ng-click="book.handler()">
+                <!-- <div class="col-md-2 text-center"><img src="assets/{{book.image_name}}" height="50" ></div> -->
+                <div class="col-md-7 my-books-name">
+                  <strong>{{book.name}}</strong><div>{{book.isbn}}</div><div>{{book.id}}</div>
+                </div>
+                <div class="col-md-3 text-right search-text my-books-author">{{book.author}}</div>
+                <div class="row-index" style="display:none;">{{$index}}</div>
+              </div>
+            </div>
+          </div>
+          <i class="form-control-feedback glyphicon glyphicon-search book-search-btn" style="top:17px;right:13px;cursor:pointer;"></i>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+      <!-- on click / enter when something is selected show this -->
+      <div class="filled-prod" style="display:none;">
+        <div class="col-lg-2 my-books-entry-image text-center"><img id="text-image" src="temp.jpg" height="50"></div>
+        <div class="col-lg-7 my-books-entry-name" style="position:relative;top:9px;"><h4><div id="text-name"></div> <small><div id="text-isbn"></div></small></h4></div>
+        <div class="col-lg-2 text-center" style="position:relative;top:11px;">
+          <div class="row buy-sell-row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+              <%= button_to("Buy it", book_matches_path(book_id: '4', state: 'buying'), method: :post, class: 'btn btn-success btn-sm') %>
+            </div>
+            <div class="col-sm-4">
+              <%= button_to("Sell it", book_matches_path(book_id: '4', state: 'selling'), method: :post, class: 'btn btn-warning btn-sm') %>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+        </div>
+        <div class="col-lg-1 text-center prod-search-close-btn"><h3><span class="glyphicon glyphicon-remove"></span></h3></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container ">
+    <div class="row my-books-title">
+      <h2>Books I'm Selling</h2>
+    </div>
+    <div class="row my-books">
+      <!-- SHOW IF NO BOOKS EXIST -->
+      <div class="my-books-empty" style="display:none;">
+        <div class="my-books-empty-shape">
+          <h4 class="my-books-empty-text text-center">add some books!</h4>
+        </div>
+      </div>
+      <!-- SHOW IF BOOKS EXIST -->
+      <div class="my-books-populated" style="">
+        <div class="row my-books-entry" ng-repeat="book in myBooks">
+          <div class="col-lg-2 my-books-entry-image text-center"><img src="assets/{{book.image_name}}" height="50" ></div>
+          <div class="col-lg-6 my-books-entry-name"><h4>{{book.name}} <small>{{book.isbn}}</small></h4></div>
+          <div class="col-lg-2 my-books-entry-notification text-center"><span ng-if="book.newNotif" class="badge">!</span></div>
+          <div ng-if="!book.isBuying" class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-warning">Selling</span></h3></div>
+          <div ng-if="book.isBuying" class="col-lg-2 my-books-entry-label text-center"><h3><span class="label label-success">Buying</span></h3></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
