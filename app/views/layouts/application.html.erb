@@ -31,7 +31,7 @@
         <% if user_signed_in? %>
           <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         <% else %>
-          <li><a href="/users/sign_in">Log in</a></li>
+          <li><%= link_to "Log in", new_user_session_path, data: { no_turbolink: true } %></li>
         <% end %>
       </ul>
     </div>
@@ -55,7 +55,10 @@
   </div>
 </body>
 
-
+<div id="Debugging Information">
+  <%= debug(params) if Rails.env.development? %>
+  <%#= debug(request) if Rails.env.development? %>
+</div>
 
 </html>
 
