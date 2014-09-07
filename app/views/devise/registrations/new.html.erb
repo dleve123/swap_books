@@ -1,0 +1,45 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+  <div class="container buffer"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 text-center">
+        <h2>Just <span style="color:rgba(231, 76, 60,1.0);">two clicks</span> to your textbook.</h2>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 text-center">
+        <%= f.email_field :email, :class => 'form-control', autofocus: true , placeholder:"Enter your .edu email..."%><br />
+        <%= f.password_field :password, :class => 'form-control', autocomplete: "off", placeholder:"Enter a password"%>
+        <%= f.password_field :password_confirmation, :class => 'form-control', autocomplete: "off", placeholder:"Confirm your password"%>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4 text-center">
+        <%= f.submit "Register", :class => 'btn btn-danger btn-lg register-button'%>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
+
+  <div class="lo-footer text-center">
+    <p>Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
+  </div>
+
+</body>
+</html>
+
+<% end %>
+
+<%= render "devise/shared/links" %>

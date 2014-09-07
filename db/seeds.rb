@@ -10,4 +10,5 @@ Book.create!(name: 'Programming 101', isbn: ("1" * 10), author: 'Thomas JakBitch
 Book.create!(name: 'Arts and Crafts', isbn: ("3" * 10), author: 'Krieger School of A/S', image_name:'arttextbook.jpg')
 Book.create!(name: 'Intro Biology', isbn: ("2" * 10), author: 'John hopkin', image_name: 'bio.jpg')
 
-User.create(email: 'dan@test.com')
+test = User.create(email: 'foo@jhu.edu', password: 'password')
+test.confirm!

@@ -32,6 +32,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'devise'
+
+gem 'omniauth-facebook'
+gem 'certified'
+
 gem 'pry-rails'
 
 # Use ActiveModel has_secure_password
@@ -45,3 +50,4 @@ gem 'pry-rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'rails_12factor', group: :production

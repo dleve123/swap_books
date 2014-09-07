@@ -1,53 +1,16 @@
-<%= content_tag "div", id: "books", data: {url: Book.all} do %>
+<%= content_tag "div", id: "books", data: { url: Book.all } do %>
 <% end %>
- <!DOCTYPE html>
-<html>
-<head>
-  <!-- BASIC -->
-  <title>SwapBooks</title>
-  <meta charset="utf-8" />
-  <%= favicon_link_tag 'favicon.ico' %>
 
-  <!-- JQUERY -->
-  <%= javascript_include_tag "jquery-1.8.3.min" %>
+<script>
+  var app = angular.module('myBooksApp', []);
+  var myBooks = $('#books').data('url')
 
-  <!-- BOOTSTRAP -->
-  <%= stylesheet_link_tag "bootstrap", media: "all" %>
-  <%= javascript_include_tag "bootstrap" %>
-
-  <!-- ANGULAR -->
-  <%= javascript_include_tag "angular" %>
-
-  <!-- CUSTOM -->
-  <%= stylesheet_link_tag "main", media: "all" %>
-  <%= stylesheet_link_tag "typeahead", media: "all" %>
-
-  <%= javascript_include_tag "main" %>
-  <%= javascript_include_tag "typeahead" %>
-
-  <%= javascript_include_tag "books" %>
-
-  <!-- LO SPECIFIC CSS -->
-  <style>
-    body {
-      background-color: transparent !important;
-    }
-  </style>
-
-</head>
+  app.controller('myBooksController', function($scope, $http) {
+    $scope.myBooks = myBooks;
+  });
+</script>
 
 <body ng-app="myBooksApp" ng-controller="myBooksController">  
-
-  <nav class="navbar navbar-default lo-navbar" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand logo" href="#"><%= image_tag "logo.png", width: '300' %></a>
-      </div>
-      <ul class="nav navbar-nav navbar-right login-button">
-        <li><a href="#">logout</a></li>
-      </ul>
-    </div>
-  </nav>
 
   <div class="container">
     <div class="row">

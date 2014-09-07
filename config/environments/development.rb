@@ -26,4 +26,19 @@ SwapBooks::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  ENV['FACEBOOK_APP_ID'] = "1471374446481731";
+  ENV['FACEBOOK_SECRET'] = "10741f1953126fb1bd0a60e5fdfce256";
+
+  ActionMailer::Base.smtp_settings = {
+    :address        => "smtp.sendgrid.net",
+    :port           => "587",
+    :authentication => :plain,
+    :user_name      => 'erichaydel',
+    :password       => 'password1',
+    :domain         => 'localhost:3000'
+  }
+
 end
