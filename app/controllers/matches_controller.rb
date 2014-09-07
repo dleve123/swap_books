@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
 
   before_action :authenticate_user!,   except: [:show] #TEst code
- 
+
   def show
     @other_user = current_user
     @user = current_user      # Obvious test code
@@ -14,7 +14,7 @@ class MatchesController < ApplicationController
       seller_match = FindSellerMatch.new(desired_book).find
       seller_match.update(buyer_id: current_user.id)
 
-      MatchMailer.match_email(current_user).deliver
+      MatchMailer.match_email(seller_match.seller, current_user, seller_match.book).deliver
 
       notice = "Requesting #{seller_match.book.name}!"
 
