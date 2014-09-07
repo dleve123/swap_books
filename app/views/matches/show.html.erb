@@ -1,13 +1,5 @@
-  <!-- LO SPECIFIC CSS -->
-  <style>
-    body {
-      background-color: transparent !important;
-    }
-  </style>
-
-</head>
-
-<body>  
+<%= javascript_include_tag "bootstrap" %>
+<%= javascript_include_tag "bootstrap-datepicker" %>
 
   <div class="container match-room-container">
     <div class="row">
@@ -33,7 +25,7 @@
                 <p><span class="chat-you"><strong>You: </strong></span><%= message.body %> <small><i>
                   <span style="color:rgb(150,150,150);"> <br> Posted: <%= message.created_at %></i></span></small></p>
               <% else %>
-                <p><span class="chat-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %><small><i>
+                <p><span class="cha t-them"><strong><%= get_sender_name(message) %></strong></span> <%= message.body %><small><i>
                   <span style="color:rgb(150,150,150);"> <br> Posted: <%= message.created_at %></span></i></small> </p>
               <% end %>
             <% end %>
@@ -68,18 +60,16 @@
         <h4 class="modal-title" id="myModalLabel">Lock In</h4>
       </div>
       <div class="modal-body">
-        <strong>Date</strong>
-        <input type="text" type="text" id="datepicker" class="form-control datepicker">
-        <br />
-        <strong>Time</strong>
-        <div class="input-append bootstrap-timepicker">
-            <input id="timepicker1" type="text" class="form-control">
-            <span class="add-on"><i class="icon-time"></i></span>
-        </div>
+
+        <%= form_for @match, :url => book_match_path(@match.book, @match), :method => :put do |f| %>
+          <%= f.datetime_local_field :meeting_time %>
+          
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Confirm</button>
+
+          <%= f.button :submit, class: 'btn btn-danger message-submit-btn' %>
+        <% end %>
+
       </div>
     </div>
   </div>
@@ -88,6 +78,3 @@
   <div class="footer text-center">
     <p >Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
   </div>
-
-</body>
-</html>

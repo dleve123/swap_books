@@ -4,10 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Congrats!</h1>
-    <h2><%= @buyer.email %> wants to buy your copy of <%= @book.name %>.</h2>
+    <h2>Congrats! You both decided on a time and place.</h2>
 
-    <p>To seal the deal, follow visit <%= @match_path %> and lock in a date and time.</p>
+    <p>You'll be meeting on <%= @time.gsub("T"," at ") %>. Don't be late!</p>
 
     <p>Thanks!</p>
     <p>-The Swap Books Team<p>

@@ -8,6 +8,8 @@ class Match < ActiveRecord::Base
 
   before_save :update_status
 
+  attr_accessor :meeting_time
+  
   def update_status
     # TODO: buyer_id.present? is most likely not necessary
     if buyer_id_changed? && buyer_id.present?

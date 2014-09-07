@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
 
-  before_action :authenticate_user!,   except: [:show] #TEst code
+  before_action :authenticate_user!
 
   def show
     @user = current_user
@@ -29,6 +29,13 @@ class MatchesController < ApplicationController
       notice = "Selling #{seller_match.book.name}!"
       redirect_to books_path, flash: { notice: notice }
     end
+  end
+
+  def update
+    @meeting_time = params[:match][:meeting_time]
+    @match = Match.unscoped.find(params[:id])
+    LockMailer.lock_email(@match.seller, @match.buyer, @match.book, @meeting_time).deliver
+    redirect_to(:back)
   end
 
   def buying_match_params
