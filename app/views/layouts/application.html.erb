@@ -29,9 +29,9 @@
       </div>
       <ul class="nav navbar-nav navbar-right login-button">
         <% if user_signed_in? %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <%= link_to "logout", destroy_user_session_path, style:"text-decoration:none", method: :delete %>
         <% else %>
-          <li><%= link_to "Log in", new_user_session_path, data: { no_turbolink: true } %></li>
+          <li><%= link_to "login", new_user_session_path, style:"text-decoration:none", data: { no_turbolink: true } %></li>
         <% end %>
       </ul>
     </div>
@@ -39,7 +39,10 @@
 
 
   <% flash.each do |type, message| %>
-  <div class="alert  custom-alert-warning text-center fade in">
+  <script>setTimeout(function() {
+    $('.custom-alert-warning').fadeOut('fast');
+}, 5000); // <-- time in milliseconds</script>
+  <div class="alert  custom-alert-warning fade in text-center">
     <button class="close" data-dismiss="alert">×</button>
     <%= message %>
   </div>
@@ -47,7 +50,9 @@
   
 
   <%= yield %>
-
+  <div class="footer text-center">
+    <p>Questions? Press? Email <a href="mailto:contact@swapbooks.net">contact@swapbooks.net</a>.</p>
+  </div>
 </body>
 
 </html>

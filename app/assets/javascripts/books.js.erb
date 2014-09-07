@@ -1,0 +1,34 @@
+$(document).ready(function() {
+
+  $('.btn-lock-in').click(function() {
+    $('#myModal').modal();
+    $('#datepicker').datepicker({});
+    $('#timepicker1').timepicker();
+  });
+
+  $('.form-control').focus(function() {
+    $('#results').show();
+  });
+
+  // Handles close button on product search
+  $('.prod-search-close-btn').click(function() {
+    $('.filled-prod').hide();
+    $('.empty-prod').show();
+  });
+
+  $('.row.search-row-result.ng-scope').click(function() {
+    var name = $(this).children('.my-books-name').children('.ng-binding').html();
+    var isbn = $(this).children('.my-books-name').children('.ng-binding')[1].innerHTML;
+    var id = $(this).children('.my-books-name').children('.ng-binding')[2].innerHTML;
+    var author = $(this).children('.my-books-author').html();
+    var url = $(this).children('.text-center').children().attr('src');
+    $('#text-name').html(name);
+    $('#text-isbn').html(isbn);
+    $("#text-image").attr("src",url);
+    $('.filled-prod').show();
+    $('.empty-prod').hide();
+    $('#results').hide();
+    $('form')[0].action = "/books/" + id + "/matches?state=buying"
+    $('form')[1].action = "/books/" + id + "/matches?state=selling"
+  });
+});

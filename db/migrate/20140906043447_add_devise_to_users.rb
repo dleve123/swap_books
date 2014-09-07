@@ -1,6 +1,9 @@
 class AddDeviseToUsers < ActiveRecord::Migration
   def self.up
-    change_table(:users) do |t|
+    create_table :users do |t|
+      t.string :email
+      t.integer :user_id
+
       ## Database authenticatable
       t.string :encrypted_password, null: false, default: ""
 
@@ -30,8 +33,7 @@ class AddDeviseToUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
 
-      # Uncomment below if timestamps were not included in your original model.
-      # t.timestamps
+      t.timestamps
     end
 
     add_index :users, :reset_password_token, unique: true
